@@ -7,14 +7,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.Iterator;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/login2")
+public class LoginServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 //   
@@ -46,19 +45,8 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("ID: " + user_id);
 		System.out.println("PW: " + user_pw);
 		
-		// Print all parameter values by .getParameterNames
-		Enumeration<String> e = request.getParameterNames();
-		Iterator<String> I = e.asIterator();
-		/* Enumeration을 사용할 경우
-		while(e.hasMoreElements()) {
-			String name = (String) e.nextElement();
-			String[] values = request.getParameterValues(name);
-			for(String value : values) {
-				System.out.println("name: " + name + "\t values: " + value);
-			}
-		}
-		*/
-		// Iterator을 사용
+		// Enumeration -> Iterator convert
+		Iterator<String> I = request.getParameterNames().asIterator();
 		while(I.hasNext()) {
 			String name = I.next();
 			String[] values = request.getParameterValues(name);
