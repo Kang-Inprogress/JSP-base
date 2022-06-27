@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="./login.js"></script>
+	<title>SPEAR</title>
+</head>
+<body>
+	<form name="formlogin" encType="UTF-8"> 
+		아이디: <input type="text" name="user_id"/><br>
+		비밀번호: <input type="password" name="user_pw"/><br>
+		<!-- 숨김 정보 전달 방법 'hidden' type -->
+		<input type="hidden" name="user_address" value="부산시 사상구 주례 2동" />
+		<input type="button" onClick="fn_validate()" value="로그인">
+		<input type="reset" value="초기화">
+	</form>
+</body>
+</html>

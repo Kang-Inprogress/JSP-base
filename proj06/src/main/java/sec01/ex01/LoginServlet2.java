@@ -1,13 +1,16 @@
 package sec01.ex01;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
+
+import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Iterator;
 
 /**
  * Servlet implementation class LoginServlet
@@ -38,6 +41,7 @@ public class LoginServlet2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		System.out.println("doGet() 호출");
 		// 파라미터 받아서 콘솔에 출력. 홈페이지에는 [address]?user_id=[value]&user_pw=[value] 이렇게 표시됨
 		String user_id = request.getParameter("user_id");
@@ -60,6 +64,7 @@ public class LoginServlet2 extends HttpServlet {
 		for(String subject : sbj) {
 			System.out.println("subject: " + subject);
 		}
+		
 	}
 
 	/**
