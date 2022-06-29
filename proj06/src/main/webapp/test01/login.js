@@ -13,4 +13,4 @@ function fn_validate() {
 		alert("올바르지 않은 비밀번호 입니다!");
 		console.log("fail");
 	}
-}
+}	
