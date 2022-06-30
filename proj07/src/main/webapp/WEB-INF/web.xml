@@ -11,12 +11,24 @@
     <url-pattern>/member</url-pattern>
   </servlet-mapping>
   <display-name>proj07</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>MemberServlet2</display-name>
+    <servlet-name>MemberServlet2</servlet-name>
+    <servlet-class>sec01.ex03.MemberServlet2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberServlet2</servlet-name>
+    <url-pattern>/MS2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MemberRegister</display-name>
+    <servlet-name>MemberRegister</servlet-name>
+    <servlet-class>sec01.ex03.MemberRegister</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberRegister</servlet-name>
+    <url-pattern>/memberRegister</url-pattern>
+  </servlet-mapping>
 </web-app>
