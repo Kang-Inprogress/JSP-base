@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class MemberDAO {
 			con = dataFactory.getConnection();
 			
 			String query = "select * from t_members";
-			System.out.println("PreparedStatement" + query);
+//			System.out.println("listMembers() called : PreparedStatement /" + query);
 			
 			// 미리 컴파일된 SQL문을 준비하는 객체: 재사용이 가능하기 때문에 자원 효율성 up(권장사항)
 			pstmt = con.prepareStatement(query);
@@ -80,11 +81,45 @@ public class MemberDAO {
 		return list;
 	}
 
-	public void addMember(String id, String pwd, String name, String email) {
-		MemberVO vo = new MemberVO();
-		vo.setId(id); vo.setPwd(pwd); vo.setName(name); vo.setEmail(email);
+	public Exception addMember(MemberVO vo) {
+		try {
+			// DataSource를 이용해 미리 데이터베이스와 연결함
+			con = dataFactory.getConnection();
+			
+			// vo에 데이터 삽입하고 Connection Pool 불러서 DB에 업데이트
+			String query = "INSERT INTO t_members(id, pwd, name, email) VALUES (?, ?, ?, ?)"; // ?의 인덱스는 1부터 시작한다!
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getPwd());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getEmail());
+			pstmt.executeUpdate();
+			pstmt.close();
+//			System.out.println("addMember(MemverVO vo) called preparedStatement /" + query);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return e;
+		}
 		
-		// vo에 데이터 삽입하고 Connection Pool 불러서 DB에 업데이트
+	}
+
+	public Exception delMember(String id) {
+		try {
+			con = dataFactory.getConnection();
+			
+			String query = "DELETE FROM t_members WHERE t_members.id=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+			pstmt.close();
+//			System.out.println("delMember(MemberVO vo) called parparedStatement /" + query);
+			return null;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return e;
+		}
 	}
 	
 //	private void connDB() {

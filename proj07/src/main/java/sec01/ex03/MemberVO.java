@@ -11,7 +11,7 @@ public class MemberVO {
 	private Date joinDate;
 	
 	public MemberVO() {
-		System.out.println("MemberVO()");
+//		System.out.println("MemberVO()");
 	}
 	// get, set을 쓰는 이유가 해당 클래스의 값에 대한 접근을 제어할 수 있기 때문이다
 	// 그래서 MemberDAO 에서 MemberVO 객체인 vo에서 일반 값에 접근하려고 했을 때 get과 set 외에 아무것도 뜨지않는 이유이다

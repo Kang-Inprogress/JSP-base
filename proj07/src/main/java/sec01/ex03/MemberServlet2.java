@@ -47,7 +47,7 @@ public class MemberServlet2 extends HttpServlet {
 				+ "<body>"
 				+ "<table border='2'>"
 				+ "<tr bgcolor='lightgreen'>"
-				+ "<td>ID</td><td>PW</td><td>Name</td><td>EMAIL</td><td>JOIN DATE</td>"
+				+ "<td>ID</td><td>PW</td><td>Name</td><td>EMAIL</td><td>JOIN DATE</td><td>비고</td>"
 				+ "</tr>");
 		for(int i=0; i<list.size(); i++) {
 			out.print("<tr>"
@@ -56,10 +56,12 @@ public class MemberServlet2 extends HttpServlet {
 					+ "<td>" + list.get(i).getName() + "</td>"
 					+ "<td>" + list.get(i).getEmail() + "</td>"
 					+ "<td>" + list.get(i).getJoinDate() + "</td>"
+					+ "<td><a href='/proj07/MR?command=delMember&id=" + list.get(i).getId() + "'>삭제</a></td>"
 					+ "</tr>");
 		}
-		out.print("</table>");
-		out.print("</html></body>");
+		out.print("</table>"
+				+ "<a href='/proj07/memberForm.html'>새 회원 등록</a>");
+		out.print("</body></html>");
 	}
 
 	/**

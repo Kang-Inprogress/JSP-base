@@ -3,27 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Member Register</title>
-	<script type="text/javascript">
-		var frmMember = document.frmMember;
-		var id = frmMember.id.value;
-		var pwd = frmMember.pwd.value;
-		var name = frmMember.name.value;
-		var email = frmMember.email.value;
-		
-		if(id == "" || id.length == 0) {
-			alert("유효하지 않은 값");
-		} else if(pwd == "" || pwd.length == 0) {
-			alert("유효하지 않은 값");
-		} else if(name == '' || name.length == 0) {
-			alert("유효하지 않은 값");
-		} else if(email == '' || email.length == 0) {
-			alert("유효하지 않은 값");
-		} else {
-			frmMember.method = "post";
-			frmMember.method = "memberRegister";
-			frmMember.submit();
-		}
-	</script>
+	<script type="text/javascript" src="./memberRegister.js"></script>
 </head>
 <body>
 	<form name="frmMember">
@@ -44,11 +24,12 @@
 				<td><input type="text" name="name" /></td>
 			</tr>
 			<tr>
-				<td>이메</td>
+				<td>이메일</td>
 				<td><input type="text" name="email" /></td>
 			</tr>
 		</table>
-		<input type="submit" value="가입하기" />
+		<input type="hidden"  name="command" value="addMember"/>
+		<input type="button" onClick="addMember()" value="가입하기" />
 		<input type="reset" value="다시 입력" />
 	</form>
 </body>
