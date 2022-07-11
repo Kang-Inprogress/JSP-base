@@ -27,7 +27,7 @@ public class ShowMemberInformation extends HttpServlet {
 		if(session != null) {
 			Boolean isLogOn = (Boolean) session.getAttribute("isLogOn");
 			if(isLogOn) {
-				String id = (String) session.getAttribute("user_id");
+				String id = (String) session.getAttribute("user_id"); // Object to String
 				String pwd = (String) session.getAttribute("user_pwd");
 				out.print("<html><body>"
 						+ "ID: " + id + "<br>"

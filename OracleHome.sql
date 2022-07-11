@@ -1,7 +1,5 @@
 SELECT * FROM t_members;
 
-SELECT decode(count(id), 1, 'true', 'false') AS RESULT FROM t_members WHERE id='kang' AND pwd='112233';
-
 INSERT ALL
     INTO t_members VALUES('takeshi' , 'take11', '강연우', 'yanu1201@naver.com', sysdate)
     INTO t_members VALUES('gurei' , 'Gurei123', '김동욱', 'mrsushi18@naver.com', sysdate)

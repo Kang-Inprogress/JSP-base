@@ -49,8 +49,8 @@ public class SessionTest extends HttpServlet {
 			if(user_id != null) {
 				session.setAttribute("user_id", user_id);
 				
-				// 사용자가 모든 쿠키 사용을 차단한 경우 URL에 jessessionid를 연결하여 전달하면서 재요청
-				// 메서드에서 차단 여부 판단을 자동으로 진행하며, encodeURL시 jessessionid를 함께 인코딩하여 전달
+				// 사용자가 모든 쿠키 사용을 차단한 경우 URL에 jssessionid를 연결하여 전달하면서 재요청
+				// 메서드에서 차단 여부 판단을 자동으로 진행하며, encodeURL시 jssessionid를 함께 인코딩하여 전달
 				String url = response.encodeURL("login"); // 매개변수로 매핑한 이름을 전달하기 위함
 				
 				out.print("<a href='" + url + "'>로그인 상태 확인</a>");
