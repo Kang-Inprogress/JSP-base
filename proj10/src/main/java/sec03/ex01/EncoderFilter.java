@@ -40,7 +40,7 @@ public class EncoderFilter implements Filter {
 		System.out.println("doFilter()");
 		// place your code here(요청 필터)
 		request.setCharacterEncoding("UTF-8");
-		
+		response.setContentType("text/html; charset=utf-8");
 		System.out.println("인코딩 필터 요청 시작");
 		long begin_time = System.currentTimeMillis(); // 요청 처리 전의 시간
 	

@@ -1,12 +1,15 @@
 package sec04.ex01;
 
+import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.HttpSessionBindingEvent;
 import jakarta.servlet.http.HttpSessionBindingListener;
 
 // HttpSessionBindingListener를 구현한 LoginImpl 클래스로 세션에 바인딩 시, 이벤트 처리를 함
+//@WebListener
 public class LoginImpl implements HttpSessionBindingListener {
 	String user_id;
 	String user_pwd;
+	// 이 클래스로 인해 만들어진 인스턴스 간의 공유하는 값
 	static int total_user = 0;
 	
 	public LoginImpl() { //default constructor

@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginServlet
+ * url: /loginSrv
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,8 +31,18 @@ public class LoginServlet extends HttpServlet {
 		LoginImpl loginUser = new LoginImpl(user_id, user_pwd);
 		
 		if(session.isNew()) { // 새로운 세션이 만들어진 경우, 세션 영역에 새로운 접속자의 추가
-			
+			session.setAttribute("loginUser", loginUser);
 		}
+		
+		out.print("<html><head><script type='text/javascript'>"
+				// js에서 history.go(0)는 현재 페이지, history.go(-1) 이전 페이지, history.go(1)다음 페이지로 이동
+				+ "setTimeout('history.go(0);', 5000)"
+				+ "</script></head>"
+				+ "<body>"
+				+ "접속자 아이디:" + loginUser.user_id + "<br>"
+				+ "접속자 비밀번호:" + loginUser.user_pwd + "<br>"
+				+ "접속자 인원 수:" + loginUser.total_user + "<br>"
+				+ "</body></html>");
 	}
 
 }
