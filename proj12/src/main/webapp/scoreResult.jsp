@@ -12,9 +12,24 @@
 <p>
 <%
 	String score = request.getParameter("score");
-	if(!(score == null | score.length() == 0)) {
-		int iscore = Integer.parseInt(score);
-		System.out.println(iscore);
+	// System.out.println(iscore);
+	if ((score == null | score.length() == 0)){ %>
+		<script type="text/javascript">
+			alert("잘못된 입력 값");
+			history.go(-1);
+		</script>
+<%	} else if (Integer.parseInt(score) < 0) { %>
+		<script type="text/javascript">
+			alert("0 이상의 큰 값을 입력하십시오");
+			history.go(-1);
+		</script>
+<%	} else if (Integer.parseInt(score) > 100) { %>
+		<script type="text/javascript">
+			alert("100 이하의 값을 입력하십시오");
+			history.go(-1);
+		</script>
+<% 	} else if(!(score == null | score.length() == 0)) {
+	int iscore = Integer.parseInt(score);
 %>
 	<h2>시험 점수: <%=iscore %>점</h2>
 	<%if(iscore >= 90) { %>
@@ -28,12 +43,23 @@
 	<%} else { %>
 		<h2>F학점</h2>
 	<%} %>
-<%	} else { %>
+<% } %>
+<%-- <%	} else if ((score == null | score.length() == 0)){ %>
 		<script type="text/javascript">
 			alert("잘못된 입력 값");
 			history.go(-1);
 		</script>
-<%	} %>
+<%	} else if (iscore < 0) { %>
+		<script type="text/javascript">
+			alert("0 이상의 큰 값을 입력하십시오");
+			history.go(-1);
+		</script>
+<%	} else if (iscore > 100) { %>
+		<script type="text/javascript">
+			alert("100 이하의 값을 입력하십시오");
+			history.go(-1);
+		</script>
+<% 	} %> --%>
 </p>
 <a href="score.jsp">점수 입력창으로 되돌아가기</a>
 </body>
