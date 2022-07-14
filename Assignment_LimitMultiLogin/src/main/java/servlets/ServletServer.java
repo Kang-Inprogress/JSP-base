@@ -35,7 +35,11 @@ public class ServletServer extends HttpServlet {
 		String pwd = req.getParameter("pwd");
 		HttpSessionListenerImplement hsli = new HttpSessionListenerImplement(id, pwd);
 		
-		List<HttpSessionListenerImplement> user_list = new ArrayList<HttpSessionListenerImplement>();
+		List<HttpSessionListenerImplement> user_list = (List<HttpSessionListenerImplement>) session.getAttribute("user_list");
+		if(user_list == null || user_list.size() == 0) {
+			user_list = new ArrayList<HttpSessionListenerImplement>();
+		}
+		
 		List<String> name_list = (List<String>) ctx.getAttribute("name_list");
 		if(name_list == null || name_list.size() == 0) {
 			name_list = new ArrayList<String>();
@@ -50,6 +54,7 @@ public class ServletServer extends HttpServlet {
 				String name = name_list.get(i);
 				if(name.equals(id)) { // 로그인 됨 처리
 					out.print("<script>alert('이미 로그인 되어있음!'); location.href='login.html';</script>");
+					session.invalidate();
 				}
 			}
 			user_list.add(hsli);
@@ -57,21 +62,25 @@ public class ServletServer extends HttpServlet {
 			name_list.add(hsli.getId());
 			ctx.setAttribute("name_list", name_list);
 		} else {
-			// 조회
-			for(int i=0; i<name_list.size(); i++) { 
-				String name = name_list.get(i);
-				if(name.equals(id)) { // 로그인 됨 처리
-					out.print("<script>alert('이미 로그인 되어있음!'); location.href='login.html';</script>");
+			// 조회(세션에서)
+			for(int i=0; i<user_list.size(); i++) {
+				String name = user_list.get(i).getId();
+				if(name.equals(id)) {
+					// 세션이 연결되어 있고, 세션에서 접속한 기록이 있다면 반복문을 빠져나오고 아무작업 하지 않고 출력부로 이동
+					break; 
+				} else {
+					// 세션이 연결된 적이 있지만 접속한 기록이 없다면 로그인 창으로
+					out.print("<script>location.href='login.html';</script>");
 				}
 			}
 		}
 		
 		out.print("<html><head><script type='text/javascript'>"
-//				+ "setTimeout(()=>location.reload(), 3000);"
+				+ "setTimeout(()=>location.reload(), 3000);"
 				+ "</script></head><body>"
 				+ "당신의 아이디: " + id + "<br>"
 				+ "현재 접속자 수: " + hsli.user_count + "<br>");
-		out.print("<a href='/logout?id=" + id + "'>로그아웃</a>" + "<br>"
+		out.print("<a href='logout?id=" + id + "'>로그아웃</a>" + "<br>"
 				+ "</body></html>");
 	}
 

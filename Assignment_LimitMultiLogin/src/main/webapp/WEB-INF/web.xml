@@ -22,4 +22,14 @@
   <listener>
     <listener-class>servlets.HttpSessionListenerImplement</listener-class>
   </listener>
+  <servlet>
+    <description></description>
+    <display-name>ServerLogout</display-name>
+    <servlet-name>ServerLogout</servlet-name>
+    <servlet-class>servlets.ServerLogout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServerLogout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
 </web-app>
