@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <display-name>Assignment_LimitMultiLogin</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ServletServer</display-name>
+    <servlet-name>ServletServer</servlet-name>
+    <servlet-class>servlets.ServletServer</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletServer</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <listener>
+    <listener-class>servlets.HttpSessionListenerImplement</listener-class>
+  </listener>
+  <servlet>
+    <description></description>
+    <display-name>ServerLogout</display-name>
+    <servlet-name>ServerLogout</servlet-name>
+    <servlet-class>servlets.ServerLogout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServerLogout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+</web-app>
