@@ -25,20 +25,29 @@ public class ServerLogout extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=utf-8");
-		PrintWriter out = resp.getWriter();
 		
 		String id = req.getParameter("id");
 		ctx = getServletContext();
 		HttpSession session = req.getSession();
 		session.invalidate();// 세션 소멸
 		
-		List<String> name_list = (List<String>) ctx.getAttribute("name_list");
-		name_list.remove(id);
+		List<LoginInformation> name_list = (List<LoginInformation>) ctx.getAttribute("name_list");
+		for(int i=0; i<name_list.size(); i++) {
+			LoginInformation userInfo = name_list.get(i);
+			if(userInfo.getId().equals(id)) {
+				if(userInfo.current_login != 0) {
+					userInfo.current_login--;
+					name_list.set(i, userInfo);
+				} else {
+					name_list.remove(i);
+				}
+			}
+		}
 		ctx.setAttribute("name_list", name_list);
 		
 		
 		// 화면에 표시, 리다이렉트
-		resp.addHeader("Refresh", "3; url=login.html");
+		resp.addHeader("Refresh", "1; url=login.html");
 	}
 
 }

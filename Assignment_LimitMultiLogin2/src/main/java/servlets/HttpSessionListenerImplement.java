@@ -21,7 +21,12 @@ public class HttpSessionListenerImplement implements HttpSessionListener {
         this.id = id;
         this.pwd = pwd;
     }
-    public boolean isLimit() { // 현재 로그인한 이력이 있을 때 몇 군데에서 로그인이 되었는가 확인
+    
+    public String getId() {
+    	return id;
+    }
+    
+    public boolean isLimit() {
     	if(current_login < login_limit) {
     		return false;
     	} else {
@@ -29,17 +34,15 @@ public class HttpSessionListenerImplement implements HttpSessionListener {
     	}
     }
     
-    public String getId() {
-    	return id;
-    }
-    
 	@Override
 	public void sessionCreated(HttpSessionEvent se) { // 세션에 연결됨을 감지
 		user_count++;
+		current_login++;
 	}
 	@Override
 	public void sessionDestroyed(HttpSessionEvent se) { // 세션 소멸
 		user_count--;
+		current_login--;
 	}
 	
 }
