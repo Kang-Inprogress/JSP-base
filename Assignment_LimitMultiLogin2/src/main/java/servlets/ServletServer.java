@@ -49,46 +49,54 @@ public class ServletServer extends HttpServlet {
 			// 컨텍스트에서 조회
 			for(int i=0; i<name_list.size(); i++) { // 컨텍스트도 새것이라면 지나침
 				LoginInformation userInfo = name_list.get(i);
-				if(userInfo.getId().equals(id) && !(userInfo.isLimit())) {
+				if(userInfo.user_name.equals(id) && userInfo.current_login < 4) { // 매칭 되었고 리미트에 안걸림
 					userInfo.current_login++;
+					hsli.setCL(userInfo.current_login);
+					user_list.add(hsli);
+					session.setAttribute("user_list", user_list);
 					name_list.set(i, userInfo);
+					ctx.setAttribute("name_list", name_list);
 					namelistIndex = i;
-				} else {
+				} else if(userInfo.user_name.equals(id) && userInfo.current_login >= 4){
 					out.print("<script>alert('최대 로그인 횟수에 도달했습니다');location.href='login.html';</script>");
 					session.invalidate();
 					break;
 				}
-			}
-			LoginInformation userInfo = new LoginInformation(hsli.getId());
+			} // 컨텍스트에도 아무런 정보가 없는 경우
+			LoginInformation userInfo = new LoginInformation(id, hsli.getCL());
 			user_list.add(hsli);
 			session.setAttribute("user_list", user_list);
 			name_list.add(userInfo);
 			ctx.setAttribute("name_list", name_list);
 			namelistIndex = 0;
 		} else {
-			// 조회(세션에서)
-			for(int i=0; i<name_list.size(); i++) {
-				LoginInformation userInfo = name_list.get(i);
-				if(userInfo.getId().equals(id) && !(userInfo.isLimit())) {
-					// 세션이 연결되어 있고, 세션에서 접속한 기록이 있다면 컨텍스트에서 해당 이름의 유저를 찾아서 리미트 확인
-					// 리미트 내라면 숫자를 추가, 아니라면 바로 종료
-					userInfo.current_login++;
-					name_list.set(i, userInfo);
-					namelistIndex = i;
-					break; 
-				} else {
-					// 세션이 연결된 적이 있지만 접속한 기록이 없다면 로그인 창으로
-					out.print("<script>location.href='login.html';</script>");
-				}
+			// 조회
+			for(int i=0; i<user_list.size(); i++) {
+				HttpSessionListenerImplement hsli_ = user_list.get(i);
+				
+				if(!(hsli_.getId().equals(id))) { // 현재 세션에 로그인 없는 경우
+					for(int j=0; j<name_list.size(); j++) { // 컨텍스트에서 한번 더 찾는다
+						LoginInformation userInfo = name_list.get(j);
+						
+						if(userInfo.user_name.equals(id)) { // 컨텍스트에서 발견 된 경우
+							userInfo.current_login++;
+							hsli.setCL(userInfo.current_login); // hsli에 컨텍스트에 저장된 기록을 받아 세션에 삽입한다
+							user_list.set(i, hsli);
+							session.setAttribute("user_list", user_list);
+							name_list.set(j, userInfo);
+							ctx.setAttribute("name_list", name_list);
+						}
+					}
+				} // 현재 세션에 로그인 정보가 있으면 아무것도 하지않는
 			}
 		}
 		
 		out.print("<html><head><script type='text/javascript'>"
-//				+ "setTimeout(()=>location.reload(), 3000);"
+				+ "setTimeout(()=>location.reload(), 3000);"
 				+ "</script></head><body>"
 				+ "당신의 아이디: " + id + "<br>"
 				+ "현재 접속자 수: " + hsli.user_count + "<br>"
-				+ "당신의 아이디로 동시 접속한 사람의 수:" +  name_list.get(namelistIndex).current_login);
+				+ "당신의 아이디로 동시 접속한 사람의 수: " +  name_list.get(namelistIndex).current_login + "<br>");
 		out.print("<a href='logout?id=" + id + "'>로그아웃</a>" + "<br>"
 				+ "</body></html>");
 	}

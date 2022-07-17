@@ -1,23 +1,11 @@
 package servlets;
 
 public class LoginInformation {
-	private String user_name;
-	int current_login = 0;
+	String user_name;
+	int current_login;
 	
-	public LoginInformation(String name) {
+	public LoginInformation(String name, int cl) {
 		user_name = name;
-		current_login++;
-	}
-	
-	public String getId() {
-		return user_name;
-	}
-	
-	public boolean isLimit() {
-		if(current_login < 4) { // login limit is 4
-			return false;
-		} else {
-			return true;
-		}
+		current_login = cl;
 	}
 }

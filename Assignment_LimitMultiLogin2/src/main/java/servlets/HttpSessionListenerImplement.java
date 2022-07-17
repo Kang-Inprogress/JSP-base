@@ -8,22 +8,30 @@ import jakarta.servlet.http.HttpSessionListener;
  *
  */
 public class HttpSessionListenerImplement implements HttpSessionListener {
+	HttpSessionListenerImplement hsli;
 	private String id;
 	private String pwd;
 	static int user_count = 0; // 이 클래스 간의 공통의 접근 가능 변수
 	private final int login_limit = 4;
-	private int current_login = 0;
+	private int current_login;
 	
 	public HttpSessionListenerImplement() {
 		// no
     }
     public HttpSessionListenerImplement(String id, String pwd) {
-        this.id = id;
-        this.pwd = pwd;
+    	this.id = id;
+    	this.pwd = pwd;
+    	current_login = 1;
     }
     
     public String getId() {
     	return id;
+    }
+    public int getCL() {
+    	return current_login;
+    }
+    public void setCL(int cl) {
+    	current_login = cl;
     }
     
     public boolean isLimit() {
