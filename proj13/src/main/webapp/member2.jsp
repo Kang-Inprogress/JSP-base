@@ -1,21 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="sec01.ex01.MemberBean, sec01.ex01.MemberDAO, java.util.*"
+    import="java.util.*, sec01.ex01.*"
     %>
+ <jsp:useBean id="m" class="sec01.ex01.MemberBean" scope="page"/>
+ <jsp:setProperty name="m" property="id" value="<%=request.getParameter("id") %>"/>
+ <jsp:setProperty name="m" property="pwd" value="<%=request.getParameter("pwd") %>"/>
+ <jsp:setProperty name="m" property="email" value="<%=request.getParameter("email") %>"/>
+ <jsp:setProperty name="m" property="name" value="<%=request.getParameter("name") %>"/>
 <%
 	request.setCharacterEncoding("utf-8"); 
 	
-	String id = request.getParameter("id");
+	/* String id = request.getParameter("id");
 	String pwd = request.getParameter("pwd");
 	String email = request.getParameter("email");
-	String name = request.getParameter("name");
+	String name = request.getParameter("name"); */
 	Boolean nflag = true; // true: 검색만, false: 출력
 	
 	MemberDAO dao = new MemberDAO();
 	List<MemberBean> memberList = new ArrayList<MemberBean>();
 	
-	if(id != null && pwd != null && email != null && name != null) {
-		MemberBean m = new MemberBean(id, pwd, email, name);
+	if(m.getId() != null && m.getPwd() != null && m.getEmail() != null && m.getName() != null) {
+		/* MemberBean m = new MemberBean(id, pwd, email, name); */
+		/* m.setId(id); m.setPwd(pwd); m.setEmail(email); m.setName(name); */
 		
 		// 회원 추가 메서드 추가
 		dao.addMembers(m);
