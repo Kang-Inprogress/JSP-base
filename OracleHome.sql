@@ -12,3 +12,5 @@ INSERT ALL
     INTO t_members VALUES('ryoma' , 'iimaItaidesu', '강동현', 'kangkgri@naver.com', sysdate)
     INTO t_members VALUES('yamada' , 'untenMakasero', '조현성', 'bestdriver82@naver.com', sysdate)
 SELECT * FROM DUAL;
+
+DELETE FROM t_members;
