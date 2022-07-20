@@ -1,4 +1,4 @@
-package sec01.ex01;
+package sec02.ex01;
 
 import java.sql.Date;
 
@@ -8,7 +8,7 @@ public class MemberBean {
 	private String email;
 	private String name;
 	private String joinDate;
-	// 삽입에 사용할 클래스 이기 때문에 joinDate는 필요 없음
+	private Address addr;
 	
 	public MemberBean() {
 		System.out.println("memberbean");
@@ -53,4 +53,19 @@ public class MemberBean {
 	public String getJoinDate() {
 		return joinDate;
 	}
+	// Address getter & setter
+
+	public Address getAddr() {
+		return addr;
+	}
+
+	public void setAddr(Address addr) {
+		this.addr = addr;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberBean [id=" + id + ", pwd=" + pwd + ", email=" + email + ", name=" + name + ", addr=" + addr + "]";
+	}
+	
 }
