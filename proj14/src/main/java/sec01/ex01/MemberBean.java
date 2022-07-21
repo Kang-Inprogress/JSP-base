@@ -20,7 +20,7 @@ public class MemberBean {
 		this.pwd = pwd;
 		this.email = email;
 		this.name = name;
-		
+		toString();
 	}
 
 	public String getId() {
@@ -52,5 +52,10 @@ public class MemberBean {
 	}
 	public String getJoinDate() {
 		return joinDate;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberBean [id=" + id + ", pwd=" + pwd + ", email=" + email + ", name=" + name + "]";
 	}
 }
